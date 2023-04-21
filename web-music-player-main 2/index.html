@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Music</title>
+    <link rel="icon" href="logo.png" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="//code.responsivevoice.org/responsivevoice.js"></script>
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=voCTLB83"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+    <style>
+      button {
+        height: 10vh;
+        display: flex;
+        background-color: black;
+        color: white;
+
+        justify-content: space-between;
+        align-items: center;
+        border: none;
+      }
+      p {
+        color: white;
+      }
+      .button-container {
+        display: flex;
+        align-items: center;
+        margin-left: -150px;
+      }
+
+      .button-container p,
+      .button-container button {
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .button-container button {
+        margin: 0 3px; /* set to add a 10px gap between the buttons */
+      }
+      .button-container p {
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li class="brand"><img src="logo.png" alt="Music" />Web Music</li>
+      </ul>
+    </nav>
+    <div class="container">
+      <div class="songList">
+        <h1>My Playlist</h1>
+        <div class="songItemContainer">
+          <div class="songItem">
+            <img alt="1" />
+            <!--cover image of song-->
+            <span class="songName"></span>
+            <span class="songListPlay"
+              ><i id="0" class="far songItemPlay fa-play-circle"></i
+            ></span>
+            <!--song name & duration-->
+
+            <audio id="track">
+              <source src="Songs/1.mp3" type="audio/mpeg" />
+            </audio>
+          </div>
+          <div class="songItem">
+            <img alt="1" />
+            <!--cover image of song-->
+            <span class="songName"></span>
+            <span class="songListPlay"
+              ><i id="1" class="far songItemPlay fa-play-circle"></i
+            ></span>
+            <!--song name & duration-->
+          </div>
+          <div class="songItem">
+            <img alt="1" />
+            <!--cover image of song-->
+            <span class="songName"></span>
+            <span class="songListPlay"
+              ><i id="2" class="far songItemPlay fa-play-circle"></i
+            ></span>
+            <!--song name & duration-->
+          </div>
+          <div class="songItem">
+            <img alt="1" />
+            <!--cover image of song-->
+            <span class="songName"></span>
+            <span class="songListPlay"
+              ><i id="3" class="far songItemPlay fa-play-circle"></i
+            ></span>
+            <!--song name & duration-->
+          </div>
+          <div class="songItem">
+            <img alt="1" />
+            <!--cover image of song-->
+            <span class="songName"></span>
+            <span class="songListPlay"
+              ><i id="4" class="far songItemPlay fa-play-circle"></i
+            ></span>
+            <!--song name & duration-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <input
+        type="range"
+        name="range"
+        id="myProgressBar"
+        min="0"
+        max="100"
+        value="0"
+      />
+      <!--Song Control-->
+      <div class="icons">
+        <i id="previous" class="fas fa-2x fa-step-backward"></i>
+        <i class="far fa-2x fa-play-circle" id="masterPlay"></i>
+        <i id="next" class="fas fa-2x fa-step-forward"></i>
+        <!--fontawesome icons-->
+      </div>
+
+      <div class="button-container">
+        <div id="songName1"></div>
+        <p>FOR SPEECH INPUT</p>
+        <button id="backSongButton" class="fas fa-2x fa-step-backward"></button>
+        <button id="masterPlay1" class="far fa-2x fa-play-circle"></button>
+        <audio id="audioPlayer" preload="auto"></audio>
+        <script>
+          const masterPlay1 = document.getElementById("masterPlay1");
+          const audioPlayer = document.getElementById("audioPlayer");
+          const songs2 = [
+            {
+              songName: "Lovely - Fly By Midnight",
+              filePath: "Songs/1.mp3",
+              cover: "Covers/1.jpg",
+            },
+            {
+              songName: "Lost - Faime",
+              filePath: "Songs/2.mp3",
+              cover: "Covers/2.jpg",
+            },
+            {
+              songName: "Rain - Faime",
+              filePath: "Songs/3.mp3",
+              cover: "Covers/3.jpg",
+            },
+            {
+              songName: "Believers - Alan Walker",
+              filePath: "Songs/4.mp3",
+              cover: "Covers/4.jpg",
+            },
+            {
+              songName: "Stereo Hearts - Gym Class Heroes",
+              filePath: "Songs/5.mp3",
+              cover: "Covers/5.jpg",
+            },
+          ];
+          let currentSongIndex1 = 0;
+          audioPlayer.src = songs2[currentSongIndex1].filePath;
+
+          function togglePlay() {
+            if (audioPlayer.paused) {
+              audioPlayer.play();
+              masterPlay1.classList.remove("fa-play-circle");
+              masterPlay1.classList.add("fa-pause-circle");
+            } else {
+              audioPlayer.pause();
+              masterPlay1.classList.remove("fa-pause-circle");
+              masterPlay1.classList.add("fa-play-circle");
+            }
+          }
+
+          function playNextSong() {
+            currentSongIndex1 = (currentSongIndex1 + 1) % songs2.length;
+            audioPlayer.src = songs1[currentSongIndex1].filePath;
+            audioPlayer.play();
+          }
+
+          masterPlay1.addEventListener("click", togglePlay);
+          audioPlayer.addEventListener("ended", playNextSong);
+        </script>
+        <button id="nextSongButton" class="fas fa-2x fa-step-forward"></button>
+      </div>
+      <div class="songInfo">
+        <img src="playing.gif" width="42px" alt="1" id="gif" />
+        <span id="masterSongName"></span>
+      </div>
+    </div>
+    <script>
+      const songs1 = [
+        
+        "Lost - Faime",
+        "Rain - Faime",
+        "Believers - Alan Walke",
+        "Stereo Hearts - Gym Class Heroes",
+      ];
+      let currentSongIndex = 0;
+
+      function displayNextSong() {
+        const songName1 = document.getElementById("songName1");
+        songName1.innerHTML = songs1[currentSongIndex];
+        //console.log(songs1[0]);
+        currentSongIndex = (currentSongIndex + 1) % songs1.length;
+        nextSong();
+        audioPlayer.pause();
+      }
+
+      const button = document.getElementById("nextSongButton");
+      button.onclick = function () {
+        displayNextSong();
+        responsiveVoice.speak(songs1[currentSongIndex]);
+      };
+    </script>
+    <script
+      src="https://kit.fontawesome.com/6f42fc440c.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="script.js"></script>
+    <script type="text/javascript">
+      var commands = {
+        play: function () {
+          var button = document.getElementById("masterPlay1"); // Select the button element by its ID
+          button.click(); // Simulate a click event on the button
+        },
+        next: function () {
+          var button = document.getElementById("nextSongButton"); // Select the button element by its ID
+          button.click(); // Simulate a click event on the button
+        },
+      };
+
+      // Initialize annyang with the defined commands
+      if (annyang) {
+        annyang.addCommands(commands);
+        annyang.start();
+      }
+    </script>
+  </body>
+</html>

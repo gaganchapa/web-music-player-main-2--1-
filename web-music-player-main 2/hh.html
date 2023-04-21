@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Audio Player</title>
+<style>
+  .far.fa-2x {
+    font-size: 2rem;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  <button id="masterPlay" class="far fa-2x fa-play-circle"></button>
+  <audio id="audioPlayer" preload="auto"></audio>
+  <script>
+    const masterPlay = document.getElementById('masterPlay');
+    const audioPlayer = document.getElementById('audioPlayer');
+    const songs = [
+      {songName: "Lovely - Fly By Midnight", filePath: "Songs/1.mp3", cover: "Covers/1.jpg"},
+      {songName: "Lost - Faime", filePath: "Songs/2.mp3", cover: "Covers/2.jpg"},
+      {songName: "Rain - Faime", filePath: "Songs/3.mp3", cover: "Covers/3.jpg"},
+      {songName: "Believers - Alan Walker", filePath: "Songs/4.mp3", cover: "Covers/4.jpg"},
+      {songName: "Stereo Hearts - Gym Class Heroes", filePath: "Songs/5.mp3", cover: "Covers/5.jpg"},
+    ];
+
+    let currentSongIndex = 0;
+    audioPlayer.src = songs[currentSongIndex].filePath;
+
+    function togglePlay() {
+      if (audioPlayer.paused) {
+        audioPlayer.play();
+        masterPlay.classList.remove('fa-play-circle');
+        masterPlay.classList.add('fa-pause-circle');
+      } else {
+        audioPlayer.pause();
+        masterPlay.classList.remove('fa-pause-circle');
+        masterPlay.classList.add('fa-play-circle');
+      }
+    }
+
+    function playNextSong() {
+      currentSongIndex = (currentSongIndex + 1) % songs.length;
+      audioPlayer.src = songs[currentSongIndex].filePath;
+      audioPlayer.play();
+    }
+
+    masterPlay.addEventListener('click', togglePlay);
+    audioPlayer.addEventListener('ended', playNextSong);
+  </script>
+  <script
+      src="https://kit.fontawesome.com/6f42fc440c.js"
+      crossorigin="anonymous"
+    ></script>
+</body>
+</html>
